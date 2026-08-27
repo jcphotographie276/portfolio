@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Baptême - Jade Photographie</title>
+    <link rel="icon" href="favicon.png" />
+    <link href="style.css" rel="stylesheet" />
+</head>
+<body>
+<div id="carousel" class="contact-hero">
+    <img src="images/carrousel.jpg" alt="Baptême" class="carousel-img" />
+    <nav class="carousel-menu" aria-label="Menu principal">
+        <a href="index.html">Accueil</a>
+        <a href="histoire.html">Mon Histoire</a>
+        <a href="index.html" class="carousel-logo">
+            <img src="images/logo_jade.png" alt="Logo Jade">
+        </a>
+        <a href="portfolio.html">Portfolio</a>
+        <a href="contact.html">Contact</a>
+    </nav>
+    <div class="carousel-title" aria-hidden="false">
+        <h1 style="font-family: 'Playfair Display', serif;" >Évènements</h1>
+    </div>
+    <div class="carousel-cloud" aria-hidden="true">
+        <svg viewBox="0 0 1200 140" preserveAspectRatio="none" xmlns="http://www.w3.org/2000/svg">
+            <path d="M0,60 C150,90 300,30 450,60 C620,105 780,35 930,65 C1040,90 1120,40 1200,55 L1200,140 L0,140 Z" fill="#f8f6f2" />
+        </svg>
+    </div>
+</div>
+<main class="category-page">
+    <section class="category-intro">
+    </section>
+    <section class="category-grid" id="baptemeGallery" aria-label="Galerie baptême"></section>
+</main>
+<img class="separator-image" src="images/double_text_separator (1).png" alt="Séparateur de texte" />
+<p class="footer-brand">@JADE.C PHOTOGRAPHIE</p>
+<footer class="site-footer">
+    <img class="footer-logo" src="images/logo_jade.png" alt="Logo Jade Photographie">
+    <p class="footer-title">Pour me contacter :</p>
+</footer>
+<script src="script.js"></script>
+<script type="module">
+import { initializeApp } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-app.js";
+import { getFirestore, collection, query, where, getDocs, orderBy } from "https://www.gstatic.com/firebasejs/11.10.0/firebase-firestore.js";
+
+const firebaseConfig = {
+    apiKey: "AIzaSyCf7-hELe7UTM4qRrSP-BTFeySo2Zk_678",
+    authDomain: "jade-photographie.firebaseapp.com",
+    projectId: "jade-photographie",
+    storageBucket: "jade-photographie.firebasestorage.app",
+    messagingSenderId: "774610773034",
+    appId: "1:774610773034:web:6b1d57344eaa65dadf4f53"
+};
+
+const app = initializeApp(firebaseConfig);
+const db = getFirestore(app);
+const gallery = document.getElementById("baptemeGallery");
+
+async function chargerBapteme() {
+    try {
+        const q = query(collection(db, "photos"), where("categorie", "==", "bapteme"), orderBy("ordre", "asc"));
+        const result = await getDocs(q);
+
+        result.forEach((doc) => {
+            const photo = doc.data();
+
+            gallery.innerHTML += `
+                <figure class="category-card">
+                    <img src="${photo.url}" alt="${photo.titre || 'Photo baptême'}">
+                </figure>
+            `;
+        });
+    } catch (error) {
+        console.error("Erreur chargement baptême :", error);
+    }
+}
+
+chargerBapteme();
+</script>
+
+<button class="scroll-top" onclick="scrollToTop()" aria-label="Remonter en haut de la page">↑</button>
+
+<a href="https://pholy.fr/reservation/jcphotographie276?utm_source=ig&utm_medium=social&utm_content=link_in_bio&fbclid=PAZXh0bgNhZW0CMTEAc3J0YwZhcHBfaWQPOTM2NjE5NzQzMzkyNDU5AAGn7gP3vV_mhta595Qe6hGwokBwGDLuOYlFeugllqA7YDcJVbPiWzk09FJ5tpw_aem_bLZaO95oNTSzq5IfuwygUQ"
+   class="reservation-btn"
+   target="_blank"
+   rel="noopener noreferrer"
+   aria-label="Réserver un shooting">
+
+    <i class="fa-solid fa-calendar-check"></i>
+    <span>Réserver</span>
+
+</a>
+
+</body>
+</html>
