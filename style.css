@@ -2182,3 +2182,28 @@ button {
 
     z-index: 10;
 }
+
+@media screen and (max-width: 768px) {
+
+    .video-container {
+        width: 90%;
+        max-width: 500px;
+        margin: 0 auto;
+    }
+
+    .video-container video {
+        width: 100%;
+        height: auto;
+        display: block;
+        border-radius: 15px;
+    }
+
+    #muteBtn {
+        top: 8px;
+        right: 8px;
+        width: 32px;
+        height: 32px;
+        font-size: 15px;
+    }
+
+}
