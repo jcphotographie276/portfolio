@@ -1,4 +1,4 @@
 User-agent: *
 Allow: /
 
-Sitemap: https://quentwax.github.io/jade.c.photographie/sitemap.xml
+Sitemap: https://jcphotographie276.github.io/portfolio/sitemap.xml
