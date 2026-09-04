@@ -65,6 +65,9 @@ document.addEventListener("DOMContentLoaded", () => {
             if (window.innerWidth <= 768) {
                 if (!toggleButton) {
                     toggleButton = createToggle();
+                }
+
+                if (!toggleButton.dataset.menuBound) {
                     toggleButton.addEventListener("click", (event) => {
                         event.stopPropagation();
                         const isOpen = menu.classList.toggle("is-open");
@@ -72,6 +75,7 @@ document.addEventListener("DOMContentLoaded", () => {
                         toggleButton.setAttribute("aria-label", isOpen ? "Fermer le menu" : "Ouvrir le menu");
                         document.body.classList.toggle('menu-open', isOpen);
                     });
+                    toggleButton.dataset.menuBound = "true";
                 }
             } else {
                 if (toggleButton) {
